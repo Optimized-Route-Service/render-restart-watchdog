@@ -1,0 +1,54 @@
+run:
+  timeout: 3m
+  tests: true
+
+linters:
+  disable-all: true
+  enable:
+    - errcheck
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+    - gosec
+    - gocritic
+    - revive
+    - unparam
+    - gofmt
+    - goimports
+    - misspell
+    - unconvert
+    - nilerr
+    - bodyclose
+    - contextcheck
+    - errorlint
+    - nolintlint
+
+linters-settings:
+  govet:
+    enable-all: true
+    disable:
+      - fieldalignment
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - style
+      - performance
+  revive:
+    rules:
+      - name: exported
+      - name: package-comments
+      - name: var-naming
+      - name: unused-parameter
+        disabled: true
+  gosec:
+    excludes:
+      - G404 # non-crypto random is fine for jitter
+
+issues:
+  exclude-rules:
+    - path: _test\.go$
+      linters:
+        - gosec
+        - errcheck
+        - unparam
